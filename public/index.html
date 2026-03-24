@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Resolve - Complaint Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation -->
+        <nav id="navbar" class="hidden">
+            <div class="nav-brand">Campus Resolve</div>
+            <div class="nav-right">
+                <span id="user-info"></span>
+                <button id="logout-btn" class="btn btn-secondary">Logout</button>
+            </div>
+        </nav>
+
+        <!-- Dynamic Content Area -->
+        <main id="main-content">
+            <!-- Login View -->
+            <div id="view-login" class="view active">
+                <div class="login-container glassmorphism">
+                    <h1>Welcome Back</h1>
+                    <p class="subtitle">Log in to manage complaints</p>
+                    <form id="login-form">
+                        <div class="input-group">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" required placeholder="Enter username">
+                        </div>
+                        <div class="input-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" required placeholder="••••••••">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Sign In</button>
+                        <div id="login-error" class="error-msg hidden">Invalid credentials</div>
+                    </form>
+                    <div class="demo-creds">
+                        <small>Demo: student1/pass123 | warden1/pass123 | staff1/pass123</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student Dashboard -->
+            <div id="view-student" class="view hidden">
+                <div class="dashboard-header">
+                    <h2>Student Dashboard</h2>
+                    <button class="btn btn-primary" onclick="appState.showModal('complaint-modal')">+ New Complaint</button>
+                </div>
+                <div class="cards-container" id="student-complaints-list">
+                    <!-- Complaints injected here -->
+                </div>
+            </div>
+
+            <!-- Warden/Staff Dashboard -->
+            <div id="view-staff" class="view hidden">
+                <div class="dashboard-header">
+                    <h2>Management Dashboard</h2>
+                </div>
+                
+                <div class="stats-container" id="reports-section">
+                    <div class="stat-card glassmorphism">
+                        <h3>Avg Resolution Time</h3>
+                        <p class="stat-value" id="stat-resolution-time">--</p>
+                    </div>
+                    <div class="stat-card glassmorphism" id="category-stats">
+                        <h3>Complaints by Category</h3>
+                        <ul id="stat-categories-list"></ul>
+                    </div>
+                </div>
+
+                <div class="table-container glassmorphism">
+                    <h3>All Complaints</h3>
+                    <table class="complaints-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Student</th>
+                                <th>Category</th>
+                                <th>Description</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="staff-complaints-list">
+                            <!-- Complaints injected here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="complaint-modal" class="modal hidden">
+        <div class="modal-content glassmorphism">
+            <span class="close" onclick="appState.hideModal('complaint-modal')">&times;</span>
+            <h2>Submit a Complaint</h2>
+            <form id="complaint-form">
+                <div class="input-group">
+                    <label for="comp-category">Category</label>
+                    <select id="comp-category" required>
+                        <option value="">Select Category</option>
+                        <option value="Maintenance">Maintenance & Repairs</option>
+                        <option value="Housekeeping">Housekeeping</option>
+                        <option value="Food & Mess">Food & Mess</option>
+                        <option value="Internet">Internet/Wi-Fi</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="comp-desc">Description</label>
+                    <textarea id="comp-desc" rows="4" required placeholder="Describe your issue in detail..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Submit Complaint</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
