@@ -1,0 +1,8 @@
+# This project uses package.json (Node.js) instead of requirements.txt (Python).
+# However, here are the main dependencies for reference:
+
+express
+cors
+bcrypt
+jsonwebtoken
+pg
